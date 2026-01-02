@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Sandwich Reasoning: An Answer-Reasoning-Answer Approach for Low-Latency Query Correction
 
 这是论文 "Sandwich Reasoning: An Answer-Reasoning-Answer Approach for Low-Latency Query Correction" 的官方实现代码。
