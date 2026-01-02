@@ -74,6 +74,3 @@ python inference.py \
     --prompt_type ans_double
 ```
 
-=======
-# SandwichR
->>>>>>> 02f894942b5b997d3cb2532cf6569646d2fbb648
