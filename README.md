@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Sandwich Reasoning: An Answer-Reasoning-Answer Approach for Low-Latency Query Correction
 
 这是论文 "Sandwich Reasoning: An Answer-Reasoning-Answer Approach for Low-Latency Query Correction" 的官方实现代码。
@@ -74,3 +75,6 @@ python inference.py \
     --prompt_type ans_double
 ```
 
+=======
+# SandwichR
+>>>>>>> 02f894942b5b997d3cb2532cf6569646d2fbb648
