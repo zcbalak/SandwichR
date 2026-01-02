@@ -1,0 +1,56 @@
+# Model arguments
+model_name_or_path: ~ # model_path
+model_revision: main
+torch_dtype: bfloat16
+attn_implementation: flash_attention_2
+trust_remote_code: true
+dataset_name: ~ # dataset
+system_prompt: "你是一个中文文本错误纠正工具，可以检测和纠正文本中的错误。请检查下列文本中的错误并进行纠正，只修改错误部分并尽量保持原句结构不变，给出你的推理过程，并输出更正后的版本。请严格使用以下格式回复：<reasoning>（简要分析错误的位置、类型和修改依据）</reasoning>\n<answer>（输出纠正后的完整文本）</answer>。" 
+  
+bf16: true 
+use_vllm: false
+vllm_device: auto
+vllm_gpu_memory_utilization: 0.85
+do_eval: False   # 对测试集进行评估
+gradient_accumulation_steps: 1
+gradient_checkpointing: false  
+gradient_checkpointing_kwargs:
+  use_reentrant: false
+learning_rate: 1.0e-05
+log_completions: true
+log_level: info
+logging_first_step: true
+logging_steps: 1
+logging_strategy: steps
+lr_scheduler_type: cosine_with_min_lr
+lr_scheduler_kwargs:
+  min_lr_rate: 0.1
+max_prompt_length: 256
+max_completion_length: 256
+max_steps: -1  # 使用epochs控制训练
+num_generations: 4 
+num_train_epochs: 20
+overwrite_output_dir: true
+per_device_eval_batch_size: 8
+per_device_train_batch_size: 8 
+push_to_hub: false 
+report_to:
+- wandb
+reward_funcs:
+- f05_check_original
+- format_ans_last
+reward_weights:
+- 1.0   # f05
+- 0.01
+save_strategy: "steps"
+save_steps: 200  # 每500步保存一次
+# save_strategy: "epoch"
+save_total_limit: 30  # 只保留最近30个检查点
+save_only_model: true  # 只保存模型权重，不保存优化器状态
+save_safetensors: true  # 使用safetensors格式保存，更安全且可能更小
+seed: 42
+temperature: 0.7
+warmup_ratio: 0.1
+
+
+use_peft: false

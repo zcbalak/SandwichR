@@ -1,0 +1,11 @@
+### model
+model_name_or_path: Qwen/Qwen2.5-3B-Instruct
+adapter_name_or_path: /home/linux/zc/LLaMA-Factory-main/saves/Qwen2.5-3B-Instruct/lora/train_2025-09-24-15-20-21
+template: qwen
+trust_remote_code: true
+
+### export
+export_dir: /home/linux/zc/LLaMA-Factory-main/merged_models/qwen2.5_3b_lora_merged_export_0924
+export_size: 5
+export_device: cpu
+export_legacy_format: false

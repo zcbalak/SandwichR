@@ -1,0 +1,25 @@
+compute_environment: LOCAL_MACHINE
+debug: false
+deepspeed_config:
+  deepspeed_multinode_launcher: standard
+  offload_optimizer_device: cpu    # 将优化器状态offload到CPU
+  offload_param_device: none
+  zero3_init_flag: false
+  zero_stage: 2
+  stage3_max_live_parameters: 1e9
+  stage3_max_reuse_distance: 1e9
+  stage3_prefetch_bucket_size: 1e7
+  stage3_param_persistence_threshold: 1e4
+distributed_type: DEEPSPEED
+downcast_bf16: 'no'
+machine_rank: 0
+main_training_function: main
+mixed_precision: bf16
+num_machines: 1
+num_processes: 2  # 使用2张gpu
+rdzv_backend: static
+same_network: true
+tpu_env: []
+tpu_use_cluster: false
+tpu_use_sudo: false
+use_cpu: false
