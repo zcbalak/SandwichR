@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-简单的Qwen2.5-1.5B-Instruct预测脚本
 """
 from code.template_prompt import template_prompts_by_questions
 from src.open_r1.conver_score import f_0_5_pred

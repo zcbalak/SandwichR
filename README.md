@@ -1,53 +1,52 @@
 # Sandwich Reasoning: An Answer-Reasoning-Answer Approach for Low-Latency Query Correction
 
-这是论文 "Sandwich Reasoning: An Answer-Reasoning-Answer Approach for Low-Latency Query Correction" 的官方实现代码。
+This is the official implementation code of the paper "Sandwich Reasoning: An Answer-Reasoning-Answer Approach for Low-Latency Query Correction".
 
-
-## 项目结构
+## Project structure
 
 ```
 SandwichR/
-├── code/                          # 数据处理和工具脚本
+├── code/                          # Data processing and tool scripts
 │   ├── reject_sampling.py        # reject sampling
-│   ├── create_dataset.py          # 数据集转换,json->dataset
-│   ├── format_reward.py          # 格式奖励
-│   ├── template_prompt.py        # prompt模板
+│   ├── create_dataset.py          # dataset conversion, json->dataset
+│   ├── format_reward.py          # format reward
+│   ├── template_prompt.py        # prompt template
 │   └── ...
-├── data/                         # 三个数据集目录
+├── data/                         # Three dataset directories
 │   ├── ecom                      
 │   ├── medical       
 │   └── video         
-├── src/                           # 核心源代码
-│   └── open_r1/                  # 训练和评估代码
-│       ├── rag_grpo_stage2.py    # GRPO训练主脚本
-│       ├── rewards.py            # 奖励函数
-│       ├── conver_score.py       # F0.5评估指标
+├── src/                           # Core source code
+│   └── open_r1/                  # Training and evaluating code
+│       ├── rag_grpo_stage2.py    # GRPO training main script
+│       ├── rewards.py            # Reward function
+│       ├── conver_score.py       # F0.5 evaluation metric
 │       └── ...
-├── recipes/                       # 训练配置文件
-│   └── Qwen2.5-Qwen-1.5B-Instrcut/  # 模型配置文件
-├── datasets/                      # dataset数据集
-├── SFT.sh                        # SFT训练脚本
-├── GRPO.sh                      # GRPO强化学习训练脚本
-├── inference.py                   # 推理评估代码
-└── readme.md                      # 本文档
+├── recipes/                       # training profiles
+│   └── Qwen2.5-Qwen-1.5B-Instrcut/  # Model profile
+├── datasets/                      # dataset dataset
+├── SFT.sh                        # SFT Training script
+├── GRPO.sh                      # GRPO Reinforcement Learning Training Script
+├── inference.py                   # Inference evaluation code
+└── readme.md                      
 ```
 
-## 环境要求
+## requirements
 
 - Python >= 3.8
-- CUDA >= 11.4 (推荐)
+- CUDA >= 11.4 
 - PyTorch >= 2.0.0
 
 
-## 快速开始示例
+## Quick Start
 
 ```
 cd SandwichR
 
-# 1. SFT 训练（使用 LLaMA-Factory）
+# 1. SFT training
 bash SFT.sh
 
-# 2. 拒绝采样，为RL训练准备数据集
+# 2. Reject sampling and prepare the dataset for RL training
 python code/reject_sampling.py \
     --model_path ./sft_model \
     --dataset_path data/ecom/train/train_data.json \
@@ -56,17 +55,17 @@ python code/reject_sampling.py \
     --sample_num 200 \
     --prompt_type ans_double
 
-# 3. 数据集转换,将 JSON 格式的数据转换为 HuggingFace datasets 格式。
+# 3. Dataset transformation, converting JSON format data to HuggingFace datasets format.
 python code/create_dataset.py \
     --train output/easy_200.json \
     --test data/ecom/dev/dev_1k.json \
     --out_path datasets/rl_dataset
 
-# 4. RL 训练
-# 修改 recipes/Qwen2.5-Qwen-1.5B-Instrcut/ans_double.yaml 中的配置
+# 4. RL training
+# Modify the configuration in recipes/Qwen2.5-Qwen-1.5B-Instrcut/ans_double.yaml
 bash GRPO.sh
 
-# 5. 推理评估
+# 5. Inference evaluation
 python inference.py \
     --model_path output/grpo_model \
     --input_json data/ecom/dev/dev_1k.json \
@@ -74,3 +73,8 @@ python inference.py \
     --prompt_type ans_double
 ```
 
+
+## Reference
+The SandwichR is built based on the following project:
+- [openr1](https://github.com/huggingface/open-r1)
+- [LlamaFactory](https://github.com/hiyouga/LlamaFactory)
